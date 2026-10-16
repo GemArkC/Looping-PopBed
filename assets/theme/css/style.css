@@ -963,3 +963,20 @@ blockquote {
 	top: 0;
 	left: -2400px;
 }
+
+.video05 .video-rounded {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;      /* change to 4 / 3, 1 / 1 or 9 / 16 to match your video */
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.video05 .video-rounded iframe.mbr-embedded-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+}
