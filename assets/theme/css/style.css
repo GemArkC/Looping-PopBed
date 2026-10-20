@@ -964,16 +964,24 @@ blockquote {
 	left: -2400px;
 }
 
-.video05 .video-rounded {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3/4;      /* change to 4 / 3, 1 / 1 or 9 / 16 to match your video */
-    border-radius: 24px;
-    overflow: hidden;
+
+.features027 .video-block {
+    align-self: center;
 }
 
-.video05 .video-rounded iframe.mbr-embedded-video {
-    position: absolute;
+.features027 .video-rounded {
+    position: relative;
+    width: 100% !important;
+    aspect-ratio: 2/3;            /* matches your portrait video */
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    isolation: isolate;             /* keeps the rounding on Safari/iOS */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    background: #000;
+}
+
+.features027 .video-rounded iframe.mbr-embedded-video {
+    position: absolute !important;
     top: 0;
     left: 0;
     width: 100% !important;
