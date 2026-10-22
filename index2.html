@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Looping PopBed – Creator Brief</title>
+<link rel="shortcut icon" href="assets/images/looping-france-300x150px.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--slate:#395886;--steel:#628ECB;--mist:#B1C9EF;--frost:#F0F3FA;--soft:#D5DEEF;--sky:#8AAEE0;--white:#fff;--ink:#22344f;--grad:linear-gradient(135deg,#8AAEE0 0%,#628ECB 40%,#395886 100%);--f:"Poppins",system-ui,sans-serif;--sh:0 20px 50px rgba(57,88,134,.18)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font:400 1rem/1.75 var(--f);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:var(--slate)}
+:focus-visible{outline:2px solid var(--slate);outline-offset:3px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto;position:relative;z-index:1}
+section{padding:clamp(3.5rem,7vw,6rem) 0}
+h1,h2,h3{font-weight:300;color:var(--slate);line-height:1.2;letter-spacing:-.02em}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);color:#fff}
+h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:1rem}
+h1 b,h2 b{font-weight:inherit}
+h3{font-size:1.1rem;font-weight:400;letter-spacing:0}
+.center{text-align:center}
+.lead{max-width:62ch;color:#4d6385;font-weight:300}
+.center .lead{margin-inline:auto}
+.ico{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--mist),var(--steel));color:#fff;margin:0 auto 1.25rem;box-shadow:0 10px 24px rgba(57,88,134,.25);font-size:1.4rem}
+.btn{display:inline-block;background:#fff;color:var(--slate);border-radius:99px;padding:.9rem 2rem;font-weight:500;font-size:.9rem;text-decoration:none;box-shadow:0 12px 30px rgba(34,52,79,.25);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.sm{padding:.55rem 1.3rem;box-shadow:none;font-size:.85rem}
+/* bands: curved gradient sections */
+.band{background:var(--grad);color:#fff;border-radius:50%/110px;padding-block:clamp(7rem,12vw,9rem);position:relative;overflow:hidden}
+.band h2,.band h3{color:#fff}
+.band .lead{color:var(--frost)}
+.band::before{content:"";position:absolute;right:8%;bottom:0;width:260px;height:70%;border-radius:200px 200px 0 0;background:rgba(255,255,255,.07)}
+/* hero */
+.hero{background:var(--grad);border-radius:0 0 50% 50%/0 0 130px 130px;padding:96px 0 clamp(7rem,12vw,9rem);position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;bottom:0;background:rgba(255,255,255,.08);border-radius:220px 220px 0 0}
+.hero::before{left:12%;width:300px;height:55%}.hero::after{left:36%;width:240px;height:75%}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s}
+nav.scrolled{background:#719ad2;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+nav .wrap{transition:height .3s;display:flex;align-items:center;justify-content:space-between;gap:1rem;height:96px}
+nav.scrolled .wrap{height:72px}
+.logo{display:block}
+.logo img{height:38px}
+nav ul{display:flex;gap:.2rem;list-style:none;padding:0;align-items:center}
+nav li a:not(.btn){display:block;padding:.5rem 1rem;color:#fff;text-decoration:none;font-size:.88rem;font-weight:400;opacity:.9}
+nav li a:not(.btn):hover{opacity:1}
+.hero .wrap.in{display:grid;gap:3rem;align-items:center;padding-top:2rem}
+@media(min-width:900px){.hero .wrap.in{grid-template-columns:1.1fr 1fr}}
+.pic img{width:100%;max-width:520px;height:auto;margin-inline:auto}
+.hero p{margin:1.25rem 0 2rem;color:var(--frost);font-weight:300;max-width:50ch}
+/* cards */
+.grid{display:grid;gap:1.5rem;margin-top:3rem}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:var(--sh);color:var(--ink)}
+.card h3{color:var(--slate);margin-bottom:.5rem}
+.card p{font-size:.92rem;color:#4d6385;font-weight:300}
+.flat{background:var(--frost);border:1px solid var(--soft);box-shadow:none}
+.num{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--grad);color:#fff;font-weight:500;font-size:.9rem;margin-bottom:1rem}
+.fcard{padding:0;overflow:hidden}
+.fcard img{width:100%;height:auto}
+.fcard div{padding:1.5rem}
+.fcard strong{display:block;font-weight:500;color:var(--slate);margin-bottom:.4rem}
+.fcard p{font-size:.92rem;color:#4d6385;font-weight:300}
+/* convenience */
+.split{display:grid;gap:2.5rem;align-items:stretch}
+.left .list{margin-top:0}
+@media(min-width:900px){.split{grid-template-columns:1fr auto;gap:4rem}}
+.list{display:grid;gap:1.25rem;margin-top:1.75rem}
+.list div{padding-left:1.25rem;border-left:3px solid var(--mist)}
+.list strong{color:var(--slate);display:block;font-weight:500}
+.list span{color:#4d6385;font-size:.94rem;font-weight:300}
+.video{aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:var(--slate);width:min(100%,360px);margin-inline:auto;position:relative;box-shadow:var(--sh)}
+@media(min-width:900px){.video{aspect-ratio:auto;margin:0;width:300px}}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.note{margin-top:2rem;padding:1.5rem;background:var(--frost);border-radius:16px;font-size:.94rem;color:#4d6385;font-weight:300}
+.note b{color:var(--slate);font-weight:500;display:block;margin-bottom:.3rem}
+/* modes + icons */
+.mode{text-align:center}
+.mode img{border-radius:24px;width:100%;aspect-ratio:1;object-fit:cover;box-shadow:var(--sh)}
+.mode span{display:inline-block;margin-top:1.1rem;background:var(--soft);color:var(--slate);border-radius:99px;padding:.35rem 1.2rem;font-size:.85rem;font-weight:500}
+.icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.25rem;margin-top:3rem}
+.icons div{text-align:center;background:#fff;border-radius:16px;box-shadow:var(--sh);padding:1.5rem .75rem;font-weight:400;color:var(--slate);font-size:.9rem;line-height:1.4}
+.icons img{width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto .9rem}
+/* brief */
+.band ul{list-style:none;padding:0;display:grid;gap:1rem;margin-top:1rem}
+.band li strong{display:block;font-weight:500;color:var(--slate)}
+.band li span{font-size:.92rem;color:#4d6385;font-weight:300}
+.cap{background:var(--frost);border-radius:16px;padding:1.5rem}
+.cap strong{color:var(--slate);display:block;margin-bottom:.35rem;font-weight:500}
+.cap p{font-size:.92rem;color:#46597a;font-weight:300}
+.phrases h3{margin:1.5rem 0 .6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips span{background:var(--soft);color:var(--slate);border-radius:99px;padding:.35rem 1rem;font-size:.88rem}
+.chips.h span{background:var(--grad);color:#fff}
+.msg{margin-top:2rem;background:var(--grad);color:#fff;border-radius:16px;padding:1.75rem;font-size:1.3rem;font-weight:300;line-height:1.4}
+.msg b{font-weight:600}
+.cta .wrap{display:grid;gap:2rem;align-items:center}
+@media(min-width:900px){.cta .wrap{grid-template-columns:1.5fr 1fr}}
+.cta .btn{justify-self:start}
+@media(min-width:900px){.cta .btn{justify-self:end}}
+footer{background:var(--slate);color:var(--mist);padding:3rem 0 2.5rem;text-align:center;margin-top:-110px;padding-top:calc(110px + 3rem);font-size:.9rem;font-weight:300}
+footer h3{color:#fff;font-size:1.4rem;max-width:30ch;margin:0 auto 1rem}
+footer a{color:#fff;text-decoration:none;margin:0 .9rem;font-weight:400}
+footer p{margin-top:1.25rem;color:var(--sky);font-size:.82rem}
+@media(max-width:700px){nav li:not(:last-child){display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+<nav><div class="wrap">
+<a class="logo" href="index.html"><img src="assets/images/looping-france_white.png" alt="Looping PH"></a>
+<ul><li><a href="#glance">At a glance</a></li><li><a href="#features">Features</a></li><li><a href="#modes">Modes</a></li><li><a href="#guide">Posting guide</a></li><li><a class="btn sm" href="https://linktr.ee/LoopingPH" target="_blank" rel="noopener">Our shop</a></li></ul>
+</div></nav>
+<div class="wrap in">
+<div>
+<h1>One Popbed, <b>four ways</b> to use it. Made for every stage.</h1>
+<p>Meet the Looping Popbed, a smart, versatile 4-in-1 sleep and play solution that grows with your little one. From newborn snuggles to toddler adventures, Popbed transforms from a co-sleeper to an infant crib, toddler crib, and full-size playard, adapting to your family's changing needs.</p>
+<p style="margin-top:-.75rem">Its easy open-and-close system takes the hassle out of setup and folding. Less time setting up. More time for what matters.</p>
+<a class="btn" href="#guide">View creator brief</a>
+</div>
+<div class="pic"><img src="assets/images/PopBed_Main2.webp" alt="Looping Popbed travel bed"></div>
+</div>
+</header>
+
+<section id="glance"><div class="wrap">
+<div class="center"><div class="ico">✦&#xFE0E;</div><h2>The Looping Popbed <b>at a glance</b></h2></div>
+<div class="grid g4">
+<div class="card flat"><div class="num">1</div><h3>Easy open and close</h3><p>A folding system designed to make opening and closing more convenient for parents.</p></div>
+<div class="card flat"><div class="num">2</div><h3>Birth to toddlerhood</h3><p>Adapts to your little one's changing needs, from newborn sleeping to toddler rest and playtime.</p></div>
+<div class="card flat"><div class="num">3</div><h3>Easier co-sleeping</h3><p>The dropping side panel lets Popbed be configured as a co-sleeper when used according to the manufacturer's instructions.</p></div>
+<div class="card flat"><div class="num">4</div><h3>Zip-on newborn bassinet</h3><p>A dedicated space for your little one during the early months.</p></div>
+<div class="card flat"><div class="num">5</div><h3>Extra comfort</h3><p>The padded bottom adds comfort for baby's rest and playtime.</p></div>
+<div class="card flat"><div class="num">6</div><h3>Easy access</h3><p>The zipper door gives convenient access to the playard when configured for appropriate use.</p></div>
+<div class="card flat"><div class="num">7</div><h3>Convenient diaper changes</h3><p>The clip-on diaper changer provides a dedicated changing surface for everyday use.</p></div>
+<div class="card flat"><div class="num">8</div><h3>Travel-friendly</h3><p>At 11.8 kg, Popbed is designed to be movable, and the included travel bag makes transport and storage easier.</p></div>
+</div></div></section>
+
+<section class="band" id="features"><div class="wrap">
+<div class="center"><h2>Thoughtful details, <b>everywhere</b></h2></div>
+<div class="grid g3">
+<div class="card fcard"><img src="assets/images/PopBed-features-13.webp" alt="Folded Popbed"><div><strong>Compact fold, ready to go</strong><p>PopBed folds in seconds and becomes compact for easy storage or travel. It comes with a convenient carrying bag.</p></div></div>
+<div class="card fcard"><img src="assets/images/PopBed-features-12.webp" alt="Mesh panels"><div><strong>Breathable mesh panels</strong><p>Mesh on all sides promotes excellent airflow, creating a well-ventilated space for resting or playing, even on warmer days.</p></div></div>
+<div class="card fcard"><img src="assets/images/PopBed-features-3.webp" alt="Drop-down side"><div><strong>Easy-access drop-down side</strong><p>Keep your little one close and within easy reach, making nighttime care easier.</p></div></div>
+<div class="card fcard"><img src="assets/images/PopBed-features-7.webp" alt="Two levels"><div><strong>Comfort that grows with them</strong><p>The upper level suits birth to 6 months (up to 9 kg). For active toddlers, the lower level is a safe, comfortable space up to 36 months (up to 15 kg).</p></div></div>
+<div class="card fcard"><img src="assets/images/PopBed-features-8.webp" alt="Sturdy legs"><div><strong>Stable support for every moment</strong><p>Sturdy legs ensure stability and safety during every use. A reliable base for sleep and play, wherever you are.</p></div></div>
+<div class="card fcard"><img src="assets/images/PopBed-features-9.webp" alt="Diaper changer"><div><strong>Quick changes, made easy</strong><p>The removable diaper changer attaches and detaches in seconds, giving a comfortable, clean changing experience.</p></div></div>
+</div></div></section>
+
+<section><div class="wrap">
+<div class="center"><h2>Made for <b>everyday convenience</b></h2></div>
+<div class="split" style="margin-top:3rem">
+<div class="left">
+<div class="list">
+<div><strong>Easy setup and folding</strong><span>The open-and-close system makes setting up and folding away your baby's space simple and practical.</span></div>
+<div><strong>Easy to move</strong><span>Weighing 11.8 kg, Popbed can be moved between rooms or suitable spaces whenever needed.</span></div>
+<div><strong>Travel-ready design</strong><span>Fold it down and pack it into the included travel bag for storage and transport, at home or on the go.</span></div>
+<div><strong>Spacious playard</strong><span>Give your growing little one room to explore, move, and play in the full-size playard configuration.</span></div>
+<div><strong>Designed for newborn days</strong><span>The zip-on bassinet gives your baby a dedicated space, while the drop-down side offers convenient access in the approved co-sleeper configuration.</span></div>
+<div><strong>Convenient diaper changes</strong><span>The clip-on diaper changer keeps essentials within easy reach.</span></div>
+</div>
+<div class="note"><b>One Popbed. Multiple possibilities.</b>
+Open with ease. Adapt as they grow across four configurations. Care with convenience. Fold and go.
+<br><br>Always follow the manufacturer's assembly, age and weight limits, and safe-sleep guidelines for each configuration.</div>
+</div>
+<div class="video"><iframe src="https://player.vimeo.com/video/1236463635?loop=1&amp;playsinline=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Looping Popbed video"></iframe></div>
+</div></div></section>
+
+<section id="modes" style="padding-top:0"><div class="wrap">
+<div class="center"><h2><b>4-in-1</b> versatility</h2><p class="lead">From those first newborn days to active toddler play, PopBed helps create a familiar space for your little one at every stage.</p></div>
+<div class="grid g4">
+<div class="mode"><img src="assets/images/PopBed-modes-5.webp" alt="Co-sleeper"><span>Co-sleeper</span></div>
+<div class="mode"><img src="assets/images/PopBed-modes-6.webp" alt="Infant crib"><span>Infant crib</span></div>
+<div class="mode"><img src="assets/images/PopBed-modes-7.webp" alt="Toddler crib"><span>Toddler crib</span></div>
+<div class="mode"><img src="assets/images/PopBed-modes-8.webp" alt="Playard"><span>Playard</span></div>
+</div></div></section>
+
+<section style="padding-top:0"><div class="wrap">
+<div class="center"><h2>Why parents <b>will love it</b></h2></div>
+<div class="icons">
+<div><img src="assets/images/PopBed-icons-5.webp" alt="">Lightweight</div>
+<div><img src="assets/images/PopBed-icons-11.webp" alt="">4-in-1 versatile design</div>
+<div><img src="assets/images/PopBed-icons-10.webp" alt="">Suitable from birth up to 15 kg</div>
+<div><img src="assets/images/PopBed-icons-12.webp" alt="">Co-sleeper function</div>
+<div><img src="assets/images/PopBed-icons-7.webp" alt="">Full-sized playpen</div>
+<div><img src="assets/images/PopBed-icons-1.webp" alt="">Zip-on newborn bassinet</div>
+<div><img src="assets/images/PopBed-icons-2.webp" alt="">Extra padded bottom</div>
+<div><img src="assets/images/PopBed-icons-9.webp" alt="">One-hand folding system</div>
+<div><img src="assets/images/PopBed-icons-3.webp" alt="">Zipper door access</div>
+<div><img src="assets/images/PopBed-icons-8.webp" alt="">Clip-on diaper changer</div>
+<div><img src="assets/images/PopBed-icons-6.webp" alt="">Travel bag included</div>
+<div><img src="assets/images/PopBed-icons-4.webp" alt="">Washable fabric</div>
+</div></div></section>
+
+<section class="band" id="guide"><div class="wrap">
+<div class="center"><h2>Content <b>inspiration</b></h2><p class="lead">We'd love to see how the Looping Popbed makes everyday parenting easier. Choose the ideas that best fit your lifestyle and storytelling style. There's no need to feature everything.</p></div>
+<div class="grid g2">
+<div class="card"><h3>Photo and carousel ideas</h3><ul>
+<li><strong>Easy open, easy close</strong><span>Show Popbed folded and fully set up to highlight its convenient design.</span></li>
+<li><strong>One Popbed, four ways to use it</strong><span>Showcase it as a co-sleeper, infant crib, toddler crib, and playard.</span></li>
+<li><strong>Your baby's cozy corner</strong><span>Share how Popbed fits into your bedroom or nursery setup.</span></li>
+<li><strong>Little features, big convenience</strong><span>Highlight your favorites: drop-down side, newborn bassinet, diaper changer, or zippered playard door.</span></li>
+<li><strong>Ready for playtime</strong><span>Capture your little one enjoying supervised playtime in the spacious playard.</span></li>
+<li><strong>Fold and go</strong><span>Feature Popbed folded alongside the included travel bag.</span></li></ul></div>
+<div class="card"><h3>Reels and video ideas</h3><ul>
+<li><strong>Just pop it open!</strong><span>Show Popbed going from folded to fully set up, then demonstrate the folding system.</span></li>
+<li><strong>One bed, four stages</strong><span>Create a quick transition: Co-sleeper → Infant crib → Toddler crib → Playard.</span></li>
+<li><strong>Growing with your little one</strong><span>Show how Popbed adapts from newborn days to toddlerhood.</span></li>
+<li><strong>A day with Popbed</strong><span>Share everyday moments, from morning care and diaper changes to playtime and bedtime routines.</span></li>
+<li><strong>Parent-friendly features</strong><span>Create a quick feature tour of the details that make Popbed practical.</span></li>
+<li><strong>Pack and go</strong><span>Show how Popbed folds into its travel bag for easy storage and transport.</span></li></ul></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2>Caption <b>ideas</b></h2><p class="lead">Use these as inspiration or write your own based on your experience with the Looping Popbed.</p>
+<div class="grid g3" style="margin-top:2rem">
+<div class="cap"><strong>Easy setup and folding</strong><p>"Parenting comes with enough challenges, so I appreciate baby essentials that make things a little easier. 🤍 Loving how easy the Looping Popbed is to set up and fold away!"</p></div>
+<div class="cap"><strong>Everyday convenience</strong><p>"Anything that makes our daily routine simpler is a win! The Looping Popbed is such a practical addition to our everyday setup. ✨"</p></div>
+<div class="cap"><strong>4-in-1 versatility</strong><p>"Love finding baby essentials that offer more than one use! The Looping Popbed has four configurations, making it a versatile addition to our baby's space. 🤍"</p></div>
+<div class="cap"><strong>Space-saving and organization</strong><p>"Making room for baby doesn't have to mean giving up all your space. 🤍 The Looping Popbed fits nicely into our bedroom setup, and I love that it folds away when needed."</p></div>
+<div class="cap"><strong>Portability</strong><p>"One less bulky baby essential to worry about! The Looping Popbed folds compactly and comes with a travel bag, making storage and bringing it along so much easier. ✨"</p></div>
+<div class="cap"><strong>A note to creators</strong><p>These are just examples. Personalize the captions, combine product highlights, or share your own experience. We encourage content that feels genuine and true to your usual style.</p></div>
+</div>
+<div class="phrases" style="margin-top:4rem">
+<h2>Key phrases <b>and messaging</b></h2><p class="lead">Use any of these naturally in your captions or content. They are suggestions, not required talking points.</p>
+<h3>Easy setup and convenience</h3><div class="chips"><span>Easy Open, Easy Close</span><span>Just Pop It Open!</span><span>Open. Use. Fold. Go.</span><span>Less Setup, More Moments</span></div>
+<h3>4-in-1 versatility</h3><div class="chips"><span>One Popbed. Four Ways to Use It.</span><span>From Co-Sleeper to Playard</span><span>One Bed, Four Stages.</span><span>A Space for Every Stage</span></div>
+<h3>Growing with your baby</h3><div class="chips"><span>Grows With Your Little One</span><span>From Newborn Days to Toddler Adventures</span><span>Made for Little Ones, Designed for Parents</span></div>
+<h3>Everyday parenting and portability</h3><div class="chips"><span>Made for Everyday Parenting</span><span>Sleep, Rest &amp; Play</span><span>Fold Away With Ease</span><span>Your Baby's Space, Wherever You Go</span></div>
+<div class="msg"><b>Looping Popbed:</b> Easy to open. Easy to fold. Made to grow with your little one.</div>
+<h2 style="margin-top:3.5rem"><b>Hashtags</b></h2><p class="lead" style="margin-bottom:1rem">We'd love for you to include these in your posts.</p>
+<div class="chips h"><span>#Looping</span><span>#LoopingPH</span><span>#LoopingPopbed</span><span>#BabyCrib</span><span>#BabyPlayard</span><span>#CoSleeper</span><span>#BabyEssentials</span><span>#BabyGear</span><span>#BabyMustHaves</span><span>#MomEssentials</span><span>#NewbornMustHaves</span><span>#ParentingPH</span><span>#MommyPH</span><span>#BabyPH</span></div>
+</div></div></section>
+
+<section class="band cta"><div class="wrap">
+<div>
+<h2>Creative <b>freedom</b></h2>
+<p class="lead">These ideas are simply for inspiration. Create content that feels natural, genuine, and true to your personal style. Our favorite highlight is Popbed's easy open-and-close system, and we'd love to see it in action. Please follow the product's setup and safety guidelines when demonstrating its configurations.</p>
+<p class="lead" style="margin-top:1rem">Tag and mention <strong>@looping.philippines</strong> in your captions and stories. If you're sharing on TikTok, we'd be thrilled to see your content there too.</p>
+</div>
+<a class="btn" href="https://linktr.ee/LoopingPH" target="_blank" rel="noopener">linktr.ee/LoopingPH</a>
+</div></section>
+
+<footer><div class="wrap">
+<h3>Thank you for helping us share the joy of the Looping Popbed Travel Bed.</h3>
+<p style="margin:0 0 1.5rem;color:var(--mist)">We can't wait to see your creativity shine.
+    <br><strong>**This is a confidential document.**</strong></p>
+<a href="https://www.facebook.com/loopingph" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/looping.philippines/" target="_blank" rel="noopener">Instagram</a><a href="https://linktr.ee/LoopingPH" target="_blank" rel="noopener">Our Shop</a>
+<p>© Copyright 2026 Looping PH. All Rights Reserved.</p>
+</div></footer>
+<script>
+(function(){
+var n=document.querySelector('nav'),v=document.querySelector('.video'),l=document.querySelector('.split .left');
+function sc(){n.classList.toggle('scrolled',window.scrollY>20)}
+function fit(){if(innerWidth<900){v.style.width='';return}
+v.style.width='0px';for(var i=0;i<5;i++){v.style.width=Math.round(l.offsetHeight*9/16)+'px'}}
+addEventListener('scroll',sc,{passive:true});addEventListener('resize',fit);addEventListener('load',fit);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+sc();fit();
+})();
+</script>
+</body>
+</html>
